@@ -1,0 +1,22 @@
+├─ Renda = $0 a $15k
+│  ├─ Residência = Alugada  ──►  Alto  [B=0, M=0, A=6]
+│  └─ Residência = Própria
+│     ├─ Dívida = Baixa  ──►  Moderado  [B=0, M=1, A=0]
+│     └─ Dívida = Alta  ──►  Alto  [B=0, M=0, A=1]
+├─ Renda = $15 a $35k
+│  ├─ Tempo de Emprego = Curto
+│  │  ├─ História de Crédito = Boa  ──►  Moderado  [B=0, M=2, A=0]
+│  │  ├─ História de Crédito = Desconhecida
+│  │  │  ├─ Dívida = Baixa  ──►  Moderado  [B=0, M=1, A=0]
+│  │  │  └─ Dívida = Alta  ──►  Alto  [B=0, M=0, A=2]
+│  │  └─ História de Crédito = Ruim  ──►  Alto  [B=0, M=0, A=1]
+│  ├─ Tempo de Emprego = Médio
+│  │  ├─ História de Crédito = Desconhecida  ──►  Moderado  [B=0, M=1, A=0]
+│  │  └─ História de Crédito = Ruim  ──►  Alto  [B=0, M=0, A=1]
+│  └─ Tempo de Emprego = Longo
+│     ├─ História de Crédito = Boa  ──►  Baixo  [B=2, M=0, A=0]
+│     └─ História de Crédito = Ruim  ──►  Moderado  [B=0, M=1, A=0]
+└─ Renda = Acima de $35k
+   ├─ História de Crédito = Boa  ──►  Baixo  [B=5, M=0, A=0]
+   ├─ História de Crédito = Desconhecida  ──►  Baixo  [B=4, M=0, A=0]
+   └─ História de Crédito = Ruim  ──►  Moderado  [B=0, M=2, A=0]

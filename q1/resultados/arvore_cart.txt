@@ -1,0 +1,20 @@
+├─ Renda ∈ {$0 a $15k, $15 a $35k}
+│  ├─ Renda = $0 a $15k
+│  │  ├─ Tempo de Emprego ∈ {Curto, Médio}  ──►  Alto  [B=0, M=0, A=6]
+│  │  └─ Tempo de Emprego = Longo
+│  │     ├─ Dívida = Baixa  ──►  Moderado  [B=0, M=1, A=0]
+│  │     └─ Dívida = Alta  ──►  Alto  [B=0, M=0, A=1]
+│  └─ Renda = $15 a $35k
+│     ├─ Tempo de Emprego ∈ {Curto, Médio}
+│     │  ├─ História de Crédito = Boa  ──►  Moderado  [B=0, M=2, A=0]
+│     │  └─ História de Crédito ∈ {Desconhecida, Ruim}
+│     │     ├─ Dívida = Baixa
+│     │     │  ├─ História de Crédito = Desconhecida  ──►  Moderado  [B=0, M=2, A=0]
+│     │     │  └─ História de Crédito = Ruim  ──►  Alto  [B=0, M=0, A=1]
+│     │     └─ Dívida = Alta  ──►  Alto  [B=0, M=0, A=3]
+│     └─ Tempo de Emprego = Longo
+│        ├─ História de Crédito = Boa  ──►  Baixo  [B=2, M=0, A=0]
+│        └─ História de Crédito = Ruim  ──►  Moderado  [B=0, M=1, A=0]
+└─ Renda = Acima de $35k
+   ├─ História de Crédito ∈ {Boa, Desconhecida}  ──►  Baixo  [B=9, M=0, A=0]
+   └─ História de Crédito = Ruim  ──►  Moderado  [B=0, M=2, A=0]

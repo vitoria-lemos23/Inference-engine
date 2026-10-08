@@ -1,0 +1,361 @@
+{
+  "meta": {
+    "algoritmo": "C4.5",
+    "classe": "Risco",
+    "base": "credito_ampliado.csv"
+  },
+  "regras": [
+    {
+      "id": "R1",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$0 a $15k"
+          ]
+        ],
+        [
+          "Residência",
+          [
+            "Alugada"
+          ]
+        ]
+      ],
+      "classe": "Alto",
+      "n": 6,
+      "acertos": 6
+    },
+    {
+      "id": "R2",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$0 a $15k"
+          ]
+        ],
+        [
+          "Residência",
+          [
+            "Própria"
+          ]
+        ],
+        [
+          "Dívida",
+          [
+            "Baixa"
+          ]
+        ]
+      ],
+      "classe": "Moderado",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R3",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$0 a $15k"
+          ]
+        ],
+        [
+          "Residência",
+          [
+            "Própria"
+          ]
+        ],
+        [
+          "Dívida",
+          [
+            "Alta"
+          ]
+        ]
+      ],
+      "classe": "Alto",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R4",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Curto"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Boa"
+          ]
+        ]
+      ],
+      "classe": "Moderado",
+      "n": 2,
+      "acertos": 2
+    },
+    {
+      "id": "R5",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Curto"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Desconhecida"
+          ]
+        ],
+        [
+          "Dívida",
+          [
+            "Baixa"
+          ]
+        ]
+      ],
+      "classe": "Moderado",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R6",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Curto"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Desconhecida"
+          ]
+        ],
+        [
+          "Dívida",
+          [
+            "Alta"
+          ]
+        ]
+      ],
+      "classe": "Alto",
+      "n": 2,
+      "acertos": 2
+    },
+    {
+      "id": "R7",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Curto"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Ruim"
+          ]
+        ]
+      ],
+      "classe": "Alto",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R8",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Médio"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Desconhecida"
+          ]
+        ]
+      ],
+      "classe": "Moderado",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R9",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Médio"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Ruim"
+          ]
+        ]
+      ],
+      "classe": "Alto",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R10",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Longo"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Boa"
+          ]
+        ]
+      ],
+      "classe": "Baixo",
+      "n": 2,
+      "acertos": 2
+    },
+    {
+      "id": "R11",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "$15 a $35k"
+          ]
+        ],
+        [
+          "Tempo de Emprego",
+          [
+            "Longo"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Ruim"
+          ]
+        ]
+      ],
+      "classe": "Moderado",
+      "n": 1,
+      "acertos": 1
+    },
+    {
+      "id": "R12",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "Acima de $35k"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Boa"
+          ]
+        ]
+      ],
+      "classe": "Baixo",
+      "n": 5,
+      "acertos": 5
+    },
+    {
+      "id": "R13",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "Acima de $35k"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Desconhecida"
+          ]
+        ]
+      ],
+      "classe": "Baixo",
+      "n": 4,
+      "acertos": 4
+    },
+    {
+      "id": "R14",
+      "condicoes": [
+        [
+          "Renda",
+          [
+            "Acima de $35k"
+          ]
+        ],
+        [
+          "História de Crédito",
+          [
+            "Ruim"
+          ]
+        ]
+      ],
+      "classe": "Moderado",
+      "n": 2,
+      "acertos": 2
+    }
+  ]
+}

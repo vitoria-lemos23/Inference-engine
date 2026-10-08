@@ -1,0 +1,79 @@
+{
+  "ID3": {
+    "regras": 14,
+    "cond_media": 2.642857142857143,
+    "cond_max": 3,
+    "profundidade": 3,
+    "atributos": [
+      "Renda",
+      "Tempo de Emprego",
+      "Dívida",
+      "História de Crédito"
+    ],
+    "acc_treino": 1.0,
+    "acc_loo": 0.8,
+    "acc_cv_media": 0.77,
+    "acc_cv_dp": 0.08426149773176361,
+    "cobertura_espaco": 1.0,
+    "cobertas": 216,
+    "perguntas_medias": 2.4444444444444446
+  },
+  "C4.5": {
+    "regras": 14,
+    "cond_media": 2.857142857142857,
+    "cond_max": 4,
+    "profundidade": 4,
+    "atributos": [
+      "Renda",
+      "Residência",
+      "Dívida",
+      "Tempo de Emprego",
+      "História de Crédito"
+    ],
+    "acc_treino": 1.0,
+    "acc_loo": 0.7,
+    "acc_cv_media": 0.7166666666666667,
+    "acc_cv_dp": 0.08266397845091498,
+    "cobertura_espaco": 0.9259259259259259,
+    "cobertas": 200,
+    "perguntas_medias": 2.462962962962963
+  },
+  "C4.5 podada": {
+    "regras": 12,
+    "cond_media": 2.75,
+    "cond_max": 4,
+    "profundidade": 4,
+    "atributos": [
+      "Renda",
+      "Tempo de Emprego",
+      "História de Crédito",
+      "Dívida"
+    ],
+    "acc_treino": 0.9666666666666667,
+    "acc_loo": 0.6333333333333333,
+    "acc_cv_media": 0.6533333333333333,
+    "acc_cv_dp": 0.07986099033807294,
+    "cobertura_espaco": 0.9259259259259259,
+    "cobertas": 200,
+    "perguntas_medias": 1.962962962962963
+  },
+  "CART": {
+    "regras": 11,
+    "cond_media": 3.0,
+    "cond_max": 4,
+    "profundidade": 6,
+    "atributos": [
+      "Renda",
+      "Tempo de Emprego",
+      "Dívida",
+      "História de Crédito"
+    ],
+    "acc_treino": 1.0,
+    "acc_loo": 0.7333333333333333,
+    "acc_cv_media": 0.6966666666666667,
+    "acc_cv_dp": 0.09363047936792095,
+    "cobertura_espaco": 0.9629629629629629,
+    "cobertas": 208,
+    "perguntas_medias": 3.2962962962962963
+  }
+}
