@@ -1,0 +1,86 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Recomendação de curso de graduação   (22 regras, 12 variáveis)
+ Sugere cursos de graduação a partir dos interesses e do perfil do estudante.
+ Encadeamento: misto (frente + trás)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> consultar
+
+Iniciando a consulta sobre «perfil vocacional» — encadeamento misto (frente + trás).
+
+? Você gosta de matemática e de resolver problemas lógicos?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Você gosta de programar ou de criar sistemas e aplicativos?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Você gosta de laboratório, experimentos e investigar como as coisas funcionam?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? Você gosta de ajudar, ensinar ou conversar com pessoas?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? Você gosta de desenhar, projetar ou criar coisas visuais?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Você se interessa por empresas, dinheiro e empreendedorismo?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? Você gosta de ler, escrever e debater ideias?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+✔ Conclusão: perfil vocacional = analítico
+   (modo misto · 7 pergunta(s) · regras disparadas: P1, C2)
+   Digite «como?» para ver como cheguei a isso.
+
+Iniciando a consulta sobre «cursos recomendados» — encadeamento misto (frente + trás).
+
+✔ Conclusão: cursos recomendados = Engenharia de Software, Design Digital
+   (modo misto · 0 pergunta(s) · regras disparadas: nenhuma regra nova)
+   Digite «como?» para ver como cheguei a isso.
+você> como curso
+• cursos recomendados = Engenharia de Software — concluído pela regra C2:
+    SE perfil vocacional = analítico E gosta de criar e desenhar = sim ENTÃO cursos recomendados = Engenharia de Software E cursos recomendados = Design Digital
+    porque:
+        • perfil vocacional = analítico — concluído pela regra P1:
+            SE gosta de matemática = sim E gosta de programar = sim ENTÃO perfil vocacional = analítico
+            porque:
+                • gosta de matemática = sim — informado pelo usuário.
+                • gosta de programar = sim — informado pelo usuário.
+        • gosta de criar e desenhar = sim — informado pelo usuário.
+você> fatos
+Fatos na memória de trabalho:
+  gosta de matemática = sim   [informado]
+  gosta de programar = sim   [informado]
+  perfil vocacional = analítico   [regra P1]
+  gosta de experimentos = não   [informado]
+  gosta de lidar com pessoas = não   [informado]
+  gosta de criar e desenhar = sim   [informado]
+  cursos recomendados = Engenharia de Software   [regra C2]
+  cursos recomendados = Design Digital   [regra C2]
+  gosta de negócios = não   [informado]
+  gosta de ler e escrever = não   [informado]
+
+Até logo!

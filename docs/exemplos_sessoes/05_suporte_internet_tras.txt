@@ -1,0 +1,91 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Suporte técnico — internet que não funciona   (19 regras, 12 variáveis)
+ Descobre a causa de uma falha de conexão (aparelho, Wi-Fi, roteador, DNS ou provedor) e indica o procedimento de solução.
+ Encadeamento: para trás (dirigido por meta)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> consultar
+
+Iniciando a consulta sobre «causa provável» — encadeamento para trás (dirigido por meta).
+
+? O roteador está ligado (alguma luz acesa)?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Outros aparelhos da casa conseguem navegar normalmente?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? O aparelho com problema está ligado por Wi-Fi ou por cabo de rede?
+    1. wifi
+    2. cabo
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> wifi
+
+? O aparelho aparece como conectado à rede Wi-Fi?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Como está o sinal Wi-Fi no aparelho?
+    1. forte
+    2. fraco
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> forte
+
+? O aparelho recebeu endereço IP válido (e não aparece "sem acesso à internet"/"IP 169.254...")?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Ao acessar um endereço IP (por exemplo, 8.8.8.8), a página/resposta aparece?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Os sites abrem quando você digita o nome (por exemplo, www.google.com)?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+✔ Conclusão: causa provável = problema de DNS
+   (modo tras · 8 pergunta(s) · regras disparadas: I7)
+   Digite «como?» para ver como cheguei a isso.
+
+Iniciando a consulta sobre «solução recomendada» — encadeamento para trás (dirigido por meta).
+
+✔ Conclusão: solução recomendada = trocar o servidor DNS para 8.8.8.8 e 1.1.1.1
+   (modo tras · 0 pergunta(s) · regras disparadas: S6)
+   Digite «como?» para ver como cheguei a isso.
+você> como solucao
+• solução recomendada = trocar o servidor DNS para 8.8.8.8 e 1.1.1.1 — concluído pela regra S6:
+    SE causa provável = problema de DNS ENTÃO solução recomendada = trocar o servidor DNS para 8.8.8.8 e 1.1.1.1
+    porque:
+        • causa provável = problema de DNS — concluído pela regra I7:
+            SE acessa sites digitando o endereço IP = sim E abre sites digitando o nome = não ENTÃO causa provável = problema de DNS
+            (justificativa da regra: Se o IP responde mas o nome não, a rede funciona e quem falha é a resolução de nomes (DNS).)
+            porque:
+                • acessa sites digitando o endereço IP = sim — informado pelo usuário.
+                • abre sites digitando o nome = não — informado pelo usuário.
+você> por que não causa = problema só no aparelho?
+«causa provável» já tem o valor problema de DNS, e a variável admite um único valor.
+As regras que concluiriam «causa provável = problema só no aparelho» e o motivo de não terem sido aplicadas:
+  • I9 (SE outros aparelhos navegam normalmente = sim E tipo de conexão do aparelho = wifi E intensidade do sinal Wi-Fi = forte E o aparelho recebeu um endereço IP válido = sim E acessa sites digitando o endereço IP = não ENTÃO causa provável = problema só no aparelho): a condição «acessa sites digitando o endereço IP = não» é falsa (valor atual: sim).
+Veja como o valor atual foi obtido:
+• causa provável = problema de DNS — concluído pela regra I7:
+    SE acessa sites digitando o endereço IP = sim E abre sites digitando o nome = não ENTÃO causa provável = problema de DNS
+    (justificativa da regra: Se o IP responde mas o nome não, a rede funciona e quem falha é a resolução de nomes (DNS).)
+    porque:
+        • acessa sites digitando o endereço IP = sim — informado pelo usuário.
+        • abre sites digitando o nome = não — informado pelo usuário.
+
+Até logo!

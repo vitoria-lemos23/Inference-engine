@@ -1,0 +1,89 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Risco de crédito (árvore ID3 da Questão 1)   (14 regras, 7 variáveis)
+ Avalia o risco de crédito (Baixo, Moderado ou Alto) de um solicitante. As regras foram extraídas da árvore ID3 treinada com os 30 exemplos da Questão 1.
+ Encadeamento: para trás (dirigido por meta)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> consultar
+
+Iniciando a consulta sobre «Risco» — encadeamento para trás (dirigido por meta).
+
+? Qual é a faixa de renda anual do solicitante?
+    1. $0 a $15k
+    2. $15 a $35k
+    3. Acima de $35k
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> por quê?
+Estou perguntando «Renda» porque preciso verificar a condição «Renda = $0 a $15k» da regra R1:
+    SE Renda = $0 a $15k E Tempo de Emprego = Curto ENTÃO Risco = Alto
+Se ela se confirmar (e as demais condições também), concluo «Risco = Alto», que ajuda a estabelecer «Risco».
+(Este é o objetivo principal da consulta: «Risco».)
+você> $15 a $35k
+
+? Como é o histórico de crédito do solicitante?
+    1. Boa
+    2. Desconhecida
+    3. Ruim
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> por quê?
+Estou perguntando «História de Crédito» porque preciso verificar a condição «História de Crédito = Boa» da regra R5:
+    SE Renda = $15 a $35k E História de Crédito = Boa E Dívida = Baixa ENTÃO Risco = Baixo
+Se ela se confirmar (e as demais condições também), concluo «Risco = Baixo», que ajuda a estabelecer «Risco».
+(Este é o objetivo principal da consulta: «Risco».)
+você> por quê?
+Chegamos ao topo da cadeia: o objetivo desta consulta é estabelecer «Risco».
+você> Boa
+
+? O nível de dívida é alto ou baixo?
+    1. Baixa
+    2. Alta
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> Baixa
+
+✔ Conclusão: Risco = Baixo
+   (modo tras · 3 pergunta(s) · regras disparadas: R5)
+   Digite «como?» para ver como cheguei a isso.
+você> como
+• Risco = Baixo — concluído pela regra R5:
+    SE Renda = $15 a $35k E História de Crédito = Boa E Dívida = Baixa ENTÃO Risco = Baixo
+    (justificativa da regra: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.)
+    porque:
+        • Renda = $15 a $35k — informado pelo usuário.
+        • História de Crédito = Boa — informado pelo usuário.
+        • Dívida = Baixa — informado pelo usuário.
+você> por que não risco = alto?
+«Risco» já tem o valor Baixo, e a variável admite um único valor.
+As regras que concluiriam «Risco = Alto» e o motivo de não terem sido aplicadas:
+  • R1 (SE Renda = $0 a $15k E Tempo de Emprego = Curto ENTÃO Risco = Alto): a condição «Renda = $0 a $15k» é falsa (valor atual: $15 a $35k).
+  • R2 (SE Renda = $0 a $15k E Tempo de Emprego = Médio ENTÃO Risco = Alto): a condição «Renda = $0 a $15k» é falsa (valor atual: $15 a $35k).
+  • R4 (SE Renda = $0 a $15k E Tempo de Emprego = Longo E Dívida = Alta ENTÃO Risco = Alto): a condição «Renda = $0 a $15k» é falsa (valor atual: $15 a $35k).
+  • R8 (SE Renda = $15 a $35k E História de Crédito = Desconhecida E Dívida = Alta ENTÃO Risco = Alto): a condição «História de Crédito = Desconhecida» é falsa (valor atual: Boa).
+  • R9 (SE Renda = $15 a $35k E História de Crédito = Ruim E Tempo de Emprego = Curto ENTÃO Risco = Alto): a condição «História de Crédito = Ruim» é falsa (valor atual: Boa).
+  • R10 (SE Renda = $15 a $35k E História de Crédito = Ruim E Tempo de Emprego = Médio ENTÃO Risco = Alto): a condição «História de Crédito = Ruim» é falsa (valor atual: Boa).
+Veja como o valor atual foi obtido:
+• Risco = Baixo — concluído pela regra R5:
+    SE Renda = $15 a $35k E História de Crédito = Boa E Dívida = Baixa ENTÃO Risco = Baixo
+    (justificativa da regra: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.)
+    porque:
+        • Renda = $15 a $35k — informado pelo usuário.
+        • História de Crédito = Boa — informado pelo usuário.
+        • Dívida = Baixa — informado pelo usuário.
+você> trilha
+Trilha de inferência:
+  1. consulta: meta «Risco» — modo tras
+  2. pergunta ao usuário: Qual é a faixa de renda anual do solicitante?
+  3. informado: Renda = $15 a $35k
+  4. regra R1 descartada: condição «Renda = $0 a $15k» não se confirmou
+  5. regra R2 descartada: condição «Renda = $0 a $15k» não se confirmou
+  6. regra R3 descartada: condição «Renda = $0 a $15k» não se confirmou
+  7. regra R4 descartada: condição «Renda = $0 a $15k» não se confirmou
+  8. pergunta ao usuário: Como é o histórico de crédito do solicitante?
+  9. informado: História de Crédito = Boa
+ 10. pergunta ao usuário: O nível de dívida é alto ou baixo?
+ 11. informado: Dívida = Baixa
+ 12. concluído: Risco = Baixo (regra R5)
+ 13. regra R5 disparada: SE Renda = $15 a $35k E História de Crédito = Boa E Dívida = Baixa ENTÃO Risco = Baixo
+ 14. meta «Risco» estabelecida: Baixo
+
+Até logo!

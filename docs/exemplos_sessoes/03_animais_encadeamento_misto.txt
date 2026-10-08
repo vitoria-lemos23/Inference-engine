@@ -1,0 +1,61 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Classificação de animais   (23 regras, 17 variáveis)
+ Identifica a classe (mamífero, ave, réptil, peixe, anfíbio) e o animal a partir de características observáveis.
+ Encadeamento: misto (frente + trás)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> sei que tem pelos, amamenta e tem listras
+Anotado: tem pelos = sim.
+Anotado: amamenta os filhotes = sim.
+Anotado: tem listras = sim.
+Com isso concluí: classe = mamífero
+você> qual é o animal?
+
+Iniciando a consulta sobre «animal» — encadeamento misto (frente + trás).
+
+? Qual é a alimentação principal do animal?
+    1. carne
+    2. plantas
+    3. variada
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> por quê?
+Estou perguntando «alimentação» porque preciso verificar a condição «alimentação = carne» da regra A4:
+    SE classe = mamífero E alimentação = carne E tamanho = grande E tem listras = não E tem manchas = não ENTÃO animal = leão
+Se ela se confirmar (e as demais condições também), concluo «animal = leão», que ajuda a estabelecer «animal».
+(Este é o objetivo principal da consulta: «animal».)
+você> plantas
+
+✔ Conclusão: animal = zebra
+   (modo misto · 1 pergunta(s) · regras disparadas: A2)
+   Digite «como?» para ver como cheguei a isso.
+você> como
+• animal = zebra — concluído pela regra A2:
+    SE classe = mamífero E tem listras = sim E alimentação = plantas ENTÃO animal = zebra
+    porque:
+        • classe = mamífero — concluído pela regra C1:
+            SE tem pelos = sim E amamenta os filhotes = sim ENTÃO classe = mamífero
+            (justificativa da regra: Pelos e amamentação são as marcas dos mamíferos.)
+            porque:
+                • tem pelos = sim — informado pelo usuário.
+                • amamenta os filhotes = sim — informado pelo usuário.
+        • tem listras = sim — informado pelo usuário.
+        • alimentação = plantas — informado pelo usuário.
+você> por que não animal = tigre?
+«animal» já tem o valor zebra, e a variável admite um único valor.
+As regras que concluiriam «animal = tigre» e o motivo de não terem sido aplicadas:
+  • A3 (SE classe = mamífero E tem listras = sim E alimentação = carne ENTÃO animal = tigre): a condição «alimentação = carne» é falsa (valor atual: plantas).
+Veja como o valor atual foi obtido:
+• animal = zebra — concluído pela regra A2:
+    SE classe = mamífero E tem listras = sim E alimentação = plantas ENTÃO animal = zebra
+    porque:
+        • classe = mamífero — concluído pela regra C1:
+            SE tem pelos = sim E amamenta os filhotes = sim ENTÃO classe = mamífero
+            (justificativa da regra: Pelos e amamentação são as marcas dos mamíferos.)
+            porque:
+                • tem pelos = sim — informado pelo usuário.
+                • amamenta os filhotes = sim — informado pelo usuário.
+        • tem listras = sim — informado pelo usuário.
+        • alimentação = plantas — informado pelo usuário.
+
+Até logo!

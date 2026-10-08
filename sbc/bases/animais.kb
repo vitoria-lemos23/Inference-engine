@@ -1,0 +1,121 @@
+# Classificação de animais — exemplo de base de conhecimento (o shell em si não conhece nada de animais).
+BASE: Classificação de animais
+DESCRIÇÃO: Identifica a classe (mamífero, ave, réptil, peixe, anfíbio) e o animal a partir de características observáveis.
+META: animal, classe
+ESTRATÉGIA: especificidade
+
+VARIÁVEL tem_penas
+    RÓTULO: tem penas
+    PERGUNTA: O animal tem penas?
+    VALORES: sim, não
+
+VARIÁVEL tem_pelos
+    RÓTULO: tem pelos
+    PERGUNTA: O animal tem pelos?
+    VALORES: sim, não
+
+VARIÁVEL tem_escamas
+    RÓTULO: tem escamas
+    PERGUNTA: O corpo é coberto de escamas?
+    VALORES: sim, não
+
+VARIÁVEL pele_umida
+    RÓTULO: pele úmida e lisa
+    PERGUNTA: A pele é úmida e lisa (sem pelos, penas ou escamas)?
+    VALORES: sim, não
+
+VARIÁVEL voa
+    RÓTULO: voa
+    PERGUNTA: O animal voa?
+    VALORES: sim, não
+
+VARIÁVEL vive_na_agua
+    RÓTULO: vive na água
+    PERGUNTA: O animal vive a maior parte do tempo na água?
+    VALORES: sim, não
+
+VARIÁVEL amamenta
+    RÓTULO: amamenta os filhotes
+    PERGUNTA: As fêmeas amamentam os filhotes?
+    VALORES: sim, não
+
+VARIÁVEL respira_por_guelras
+    RÓTULO: respira por guelras
+    PERGUNTA: O animal respira por guelras?
+    VALORES: sim, não
+
+VARIÁVEL alimentacao
+    RÓTULO: alimentação
+    PERGUNTA: Qual é a alimentação principal do animal?
+    VALORES: carne, plantas, variada
+
+VARIÁVEL pescoco_longo
+    RÓTULO: pescoço longo
+    PERGUNTA: O animal tem pescoço muito longo?
+    VALORES: sim, não
+
+VARIÁVEL listras
+    RÓTULO: tem listras
+    PERGUNTA: O corpo tem listras?
+    VALORES: sim, não
+
+VARIÁVEL manchas
+    RÓTULO: tem manchas
+    PERGUNTA: O corpo tem manchas?
+    VALORES: sim, não
+
+VARIÁVEL tamanho
+    RÓTULO: tamanho
+    PERGUNTA: Qual é o tamanho do animal?
+    VALORES: pequeno, médio, grande
+
+VARIÁVEL anda_em_duas_patas
+    RÓTULO: anda em duas patas e não voa
+    PERGUNTA: É uma ave que não voa e anda sobre duas patas?
+    VALORES: sim, não
+
+VARIÁVEL nada_bem
+    RÓTULO: nada muito bem
+    PERGUNTA: O animal nada muito bem?
+    VALORES: sim, não
+
+VARIÁVEL classe
+    RÓTULO: classe
+    VALORES: mamífero, ave, réptil, peixe, anfíbio
+
+VARIÁVEL animal
+    RÓTULO: animal
+    VALORES: girafa, zebra, leão, tigre, onça, morcego, golfinho, avestruz, pinguim, águia, cobra, tartaruga, tubarão, sapo, peixe-dourado, elefante
+
+# ---- nível 1: classe zoológica -------------------------------------------------------------
+REGRA C1: SE tem_pelos = sim E amamenta = sim ENTÃO classe = mamífero
+    EXPLICAÇÃO: Pelos e amamentação são as marcas dos mamíferos.
+REGRA C2: SE amamenta = sim E vive_na_agua = sim E respira_por_guelras = não ENTÃO classe = mamífero
+    EXPLICAÇÃO: Mamíferos aquáticos (golfinhos, baleias) amamentam e respiram ar.
+REGRA C3: SE tem_penas = sim ENTÃO classe = ave
+    EXPLICAÇÃO: Só as aves têm penas.
+REGRA C4: SE tem_escamas = sim E respira_por_guelras = sim E vive_na_agua = sim ENTÃO classe = peixe
+    EXPLICAÇÃO: Escamas e guelras numa criatura aquática caracterizam peixes.
+REGRA C5: SE tem_escamas = sim E respira_por_guelras = não E amamenta = não E tem_penas = não ENTÃO classe = réptil
+    EXPLICAÇÃO: Répteis têm escamas e respiram por pulmões.
+REGRA C6: SE pele_umida = sim E tem_escamas = não E tem_penas = não E tem_pelos = não ENTÃO classe = anfíbio
+    EXPLICAÇÃO: Anfíbios têm pele úmida e lisa.
+
+# ---- nível 2: espécie ----------------------------------------------------------------------
+REGRA A1: SE classe = mamífero E pescoco_longo = sim E manchas = sim ENTÃO animal = girafa
+REGRA A2: SE classe = mamífero E listras = sim E alimentacao = plantas ENTÃO animal = zebra
+REGRA A3: SE classe = mamífero E listras = sim E alimentacao = carne ENTÃO animal = tigre
+REGRA A4: SE classe = mamífero E alimentacao = carne E tamanho = grande E listras = não E manchas = não ENTÃO animal = leão
+REGRA A5: SE classe = mamífero E alimentacao = carne E manchas = sim E tamanho = grande E pescoco_longo = não ENTÃO animal = onça
+REGRA A6: SE classe = mamífero E voa = sim ENTÃO animal = morcego
+    EXPLICAÇÃO: O único mamífero capaz de voar é o morcego.
+REGRA A7: SE classe = mamífero E vive_na_agua = sim E nada_bem = sim ENTÃO animal = golfinho
+REGRA A8: SE classe = mamífero E alimentacao = plantas E tamanho = grande E pescoco_longo = não E listras = não ENTÃO animal = elefante
+REGRA A9: SE classe = ave E voa = não E anda_em_duas_patas = sim E tamanho = grande ENTÃO animal = avestruz
+REGRA A10: SE classe = ave E voa = não E nada_bem = sim ENTÃO animal = pinguim
+REGRA A11: SE classe = ave E voa = sim E alimentacao = carne ENTÃO animal = águia
+REGRA A12: SE classe = réptil E vive_na_agua = não E tamanho = médio E pescoco_longo = não E manchas = não ENTÃO animal = tartaruga
+REGRA A13: SE classe = réptil E tamanho = pequeno OU classe = réptil E tamanho = grande ENTÃO animal = cobra
+REGRA A14: SE classe = peixe E tamanho = grande E alimentacao = carne ENTÃO animal = tubarão
+REGRA A15: SE classe = peixe E tamanho = pequeno ENTÃO animal = peixe-dourado
+REGRA A16: SE classe = anfíbio ENTÃO animal = sapo

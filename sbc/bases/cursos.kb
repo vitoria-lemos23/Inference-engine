@@ -1,0 +1,89 @@
+# Recomendação de curso de graduação — exemplo de base de conhecimento.
+BASE: Recomendação de curso de graduação
+DESCRIÇÃO: Sugere cursos de graduação a partir dos interesses e do perfil do estudante.
+META: perfil, curso
+ESTRATÉGIA: prioridade
+
+VARIÁVEL gosta_matematica
+    RÓTULO: gosta de matemática
+    PERGUNTA: Você gosta de matemática e de resolver problemas lógicos?
+    VALORES: sim, não
+
+VARIÁVEL gosta_programar
+    RÓTULO: gosta de programar
+    PERGUNTA: Você gosta de programar ou de criar sistemas e aplicativos?
+    VALORES: sim, não
+
+VARIÁVEL gosta_biologia
+    RÓTULO: gosta de biologia
+    PERGUNTA: Você se interessa por seres vivos, corpo humano e saúde?
+    VALORES: sim, não
+
+VARIÁVEL gosta_pessoas
+    RÓTULO: gosta de lidar com pessoas
+    PERGUNTA: Você gosta de ajudar, ensinar ou conversar com pessoas?
+    VALORES: sim, não
+
+VARIÁVEL gosta_criar
+    RÓTULO: gosta de criar e desenhar
+    PERGUNTA: Você gosta de desenhar, projetar ou criar coisas visuais?
+    VALORES: sim, não
+
+VARIÁVEL gosta_negocios
+    RÓTULO: gosta de negócios
+    PERGUNTA: Você se interessa por empresas, dinheiro e empreendedorismo?
+    VALORES: sim, não
+
+VARIÁVEL gosta_experimentos
+    RÓTULO: gosta de experimentos
+    PERGUNTA: Você gosta de laboratório, experimentos e investigar como as coisas funcionam?
+    VALORES: sim, não
+
+VARIÁVEL gosta_escrever
+    RÓTULO: gosta de ler e escrever
+    PERGUNTA: Você gosta de ler, escrever e debater ideias?
+    VALORES: sim, não
+
+VARIÁVEL tempo_disponivel
+    RÓTULO: período
+    PERGUNTA: Você só pode estudar em qual período?
+    VALORES: integral, noturno
+
+VARIÁVEL perfil
+    RÓTULO: perfil vocacional
+    VALORES: analítico, investigativo, social, criativo, empreendedor, comunicativo
+    MULTIVALORADA: sim
+
+VARIÁVEL curso
+    RÓTULO: cursos recomendados
+    MULTIVALORADA: sim
+    PERGUNTÁVEL: não
+
+VARIÁVEL aviso
+    RÓTULO: aviso
+    MULTIVALORADA: sim
+    PERGUNTÁVEL: não
+
+REGRA P1: SE gosta_matematica = sim E gosta_programar = sim ENTÃO perfil = analítico
+REGRA P2: SE gosta_experimentos = sim E gosta_biologia = sim ENTÃO perfil = investigativo
+REGRA P3: SE gosta_pessoas = sim E gosta_biologia = sim OU gosta_pessoas = sim E gosta_escrever = sim ENTÃO perfil = social
+REGRA P4: SE gosta_criar = sim E gosta_programar = não OU gosta_criar = sim E gosta_matematica = não ENTÃO perfil = criativo
+REGRA P5: SE gosta_negocios = sim ENTÃO perfil = empreendedor
+REGRA P6: SE gosta_escrever = sim E gosta_pessoas = sim E gosta_negocios = não ENTÃO perfil = comunicativo
+
+REGRA C1: SE perfil = analítico E gosta_criar = não ENTÃO curso = Ciência da Computação
+REGRA C2: SE perfil = analítico E gosta_criar = sim ENTÃO curso = Engenharia de Software E curso = Design Digital
+REGRA C3: SE gosta_matematica = sim E gosta_programar = não E gosta_experimentos = sim ENTÃO curso = Física E curso = Engenharia Elétrica
+REGRA C4: SE perfil = investigativo E gosta_pessoas = sim ENTÃO curso = Medicina
+REGRA C5: SE perfil = investigativo E gosta_pessoas = não ENTÃO curso = Biologia E curso = Biotecnologia
+REGRA C6: SE perfil = social E gosta_biologia = sim ENTÃO curso = Enfermagem E curso = Psicologia
+REGRA C7: SE perfil = social E gosta_escrever = sim ENTÃO curso = Pedagogia E curso = Serviço Social
+REGRA C8: SE perfil = criativo ENTÃO curso = Arquitetura E curso = Design E curso = Publicidade
+REGRA C9: SE perfil = empreendedor E gosta_matematica = sim ENTÃO curso = Administração E curso = Ciências Econômicas
+REGRA C10: SE perfil = empreendedor E gosta_matematica = não ENTÃO curso = Marketing E curso = Gestão Comercial
+REGRA C11: SE perfil = comunicativo ENTÃO curso = Jornalismo E curso = Letras E curso = Direito
+REGRA C12 [prioridade 5]: SE perfil = empreendedor E gosta_programar = sim ENTÃO curso = Sistemas de Informação
+    EXPLICAÇÃO: Combina gestão de negócios e tecnologia.
+
+REGRA A1: SE curso = Medicina E tempo_disponivel = noturno ENTÃO aviso = Medicina costuma ser integral; considere Enfermagem no período noturno
+REGRA A2: SE curso = Arquitetura E tempo_disponivel = noturno ENTÃO aviso = Arquitetura tem muitas atividades de ateliê; verifique a oferta no período noturno

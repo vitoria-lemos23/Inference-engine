@@ -1,0 +1,101 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Diagnóstico de computador   (39 regras, 18 variáveis)
+ Localiza o subsistema defeituoso de um computador desktop (energia, memória, vídeo, disco, refrigeração ou software) e recomenda a ação de reparo.
+ Encadeamento: misto (frente + trás)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> o computador liga: não
+Anotado: o computador liga = não.
+você> consultar
+
+Iniciando a consulta sobre «defeito provável» — encadeamento misto (frente + trás).
+
+? Há cheiro de queimado ou componentes visivelmente danificados?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O disco rígido faz cliques ou ruído de raspagem?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O sistema operacional chega a iniciar?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não sei
+
+? Uma verificação completa com antivírus encontra ameaças?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O computador está muito lento?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? A placa-mãe emite bipes ao ligar?
+    1. nenhum
+    2. curtos repetidos
+    3. um longo e dois curtos
+    4. longos repetidos
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não sei
+
+? Ocorrem telas azuis de erro (ou travamentos com mensagem de erro)?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? Qual é a temperatura da CPU (em °C) com o computador em uso?
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> 55
+
+? O computador reinicia ou desliga sozinho durante o uso?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+✔ Conclusão: defeito provável = fonte de alimentação
+   (modo misto · 9 pergunta(s) · regras disparadas: E2, E3, G1, X1, X11)
+   Digite «como?» para ver como cheguei a isso.
+
+Iniciando a consulta sobre «ação recomendada» — encadeamento misto (frente + trás).
+
+✔ Conclusão: ação recomendada = verificar tomada e cabo de força, testar ou trocar a fonte, não insistir em ligar o equipamento até a verificação
+   (modo misto · 0 pergunta(s) · regras disparadas: nenhuma regra nova)
+   Digite «como?» para ver como cheguei a isso.
+você> como defeito
+• defeito provável = fonte de alimentação — concluído pela regra E3:
+    SE subsistema suspeito = energia ENTÃO defeito provável = fonte de alimentação
+    porque:
+        • subsistema suspeito = energia — concluído pela regra E2:
+            SE o computador liga = não E cheiro de queimado = não ENTÃO subsistema suspeito = energia
+            (justificativa da regra: Sem nenhum sinal de vida, a causa mais comum é a alimentação elétrica.)
+            porque:
+                • o computador liga = não — informado pelo usuário.
+                • cheiro de queimado = não — informado pelo usuário.
+você> como acao
+• ação recomendada = verificar tomada e cabo de força — concluído pela regra X1:
+    SE defeito provável = fonte de alimentação ENTÃO ação recomendada = verificar tomada e cabo de força E ação recomendada = testar ou trocar a fonte
+    porque:
+        • defeito provável = fonte de alimentação — concluído pela regra E3:
+            SE subsistema suspeito = energia ENTÃO defeito provável = fonte de alimentação
+            porque:
+                • subsistema suspeito = energia — concluído pela regra E2:
+                    SE o computador liga = não E cheiro de queimado = não ENTÃO subsistema suspeito = energia
+                    (justificativa da regra: Sem nenhum sinal de vida, a causa mais comum é a alimentação elétrica.)
+                    porque:
+                        • o computador liga = não — informado pelo usuário.
+                        • cheiro de queimado = não — informado pelo usuário.
+
+Até logo!

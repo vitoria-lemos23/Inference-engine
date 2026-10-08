@@ -1,0 +1,82 @@
+# Seleção de produto (smartphone) — exemplo de base de conhecimento. Usa perfis genéricos, não modelos reais.
+BASE: Escolha de smartphone
+DESCRIÇÃO: Recomenda o perfil de smartphone mais adequado ao orçamento e ao uso do cliente.
+META: recomendacao
+ESTRATÉGIA: especificidade
+
+VARIÁVEL orcamento
+    RÓTULO: orçamento (R$)
+    PERGUNTA: Qual é o seu orçamento máximo, em reais?
+    TIPO: numero
+
+VARIÁVEL uso
+    RÓTULO: uso principal
+    PERGUNTA: Qual será o uso principal do aparelho?
+    VALORES: básico, fotos, jogos, trabalho
+
+VARIÁVEL sistema
+    RÓTULO: sistema preferido
+    PERGUNTA: Qual sistema operacional você prefere?
+    VALORES: android, ios, indiferente
+
+VARIÁVEL bateria_importante
+    RÓTULO: autonomia de bateria é prioridade
+    PERGUNTA: Passa o dia fora de casa e precisa de bateria de longa duração?
+    VALORES: sim, não
+
+VARIÁVEL mao_pequena
+    RÓTULO: prefere aparelho compacto
+    PERGUNTA: Prefere um aparelho compacto, de uso com uma só mão?
+    VALORES: sim, não
+
+VARIÁVEL resistente_agua
+    RÓTULO: precisa de resistência à água
+    PERGUNTA: Precisa que o aparelho resista a água e poeira?
+    VALORES: sim, não
+
+VARIÁVEL faixa
+    RÓTULO: faixa de preço
+    VALORES: entrada, intermediário, avançado, topo de linha
+
+VARIÁVEL perfil_tecnico
+    RÓTULO: perfil técnico necessário
+    VALORES: processador simples, bom custo-benefício, câmera avançada, alto desempenho gráfico, multitarefa e armazenamento amplo
+
+VARIÁVEL recomendacao
+    RÓTULO: recomendação
+    VALORES: celular de entrada com bateria grande, celular de entrada básico, intermediário focado em câmera, intermediário equilibrado, intermediário com bom desempenho, avançado focado em câmera, avançado para jogos, avançado para produtividade, topo de linha ios, topo de linha android
+    PERGUNTÁVEL: não
+
+VARIÁVEL observacao
+    RÓTULO: observações
+    MULTIVALORADA: sim
+    PERGUNTÁVEL: não
+
+REGRA F1: SE orcamento < 1200 ENTÃO faixa = entrada
+REGRA F2: SE orcamento >= 1200 E orcamento < 3000 ENTÃO faixa = intermediário
+REGRA F3: SE orcamento >= 3000 E orcamento < 6000 ENTÃO faixa = avançado
+REGRA F4: SE orcamento >= 6000 ENTÃO faixa = topo de linha
+
+REGRA P1: SE uso = básico ENTÃO perfil_tecnico = processador simples
+REGRA P2: SE uso = fotos ENTÃO perfil_tecnico = câmera avançada
+REGRA P3: SE uso = jogos ENTÃO perfil_tecnico = alto desempenho gráfico
+REGRA P4: SE uso = trabalho ENTÃO perfil_tecnico = multitarefa e armazenamento amplo
+
+REGRA C1: SE faixa = entrada E bateria_importante = sim ENTÃO recomendacao = celular de entrada com bateria grande
+REGRA C2: SE faixa = entrada E bateria_importante = não ENTÃO recomendacao = celular de entrada básico
+REGRA C3: SE faixa = intermediário E perfil_tecnico = câmera avançada ENTÃO recomendacao = intermediário focado em câmera
+REGRA C4: SE faixa = intermediário E perfil_tecnico = alto desempenho gráfico ENTÃO recomendacao = intermediário com bom desempenho
+REGRA C5: SE faixa = intermediário E perfil_tecnico EM [processador simples, multitarefa e armazenamento amplo] ENTÃO recomendacao = intermediário equilibrado
+REGRA C6: SE faixa = avançado E perfil_tecnico = câmera avançada ENTÃO recomendacao = avançado focado em câmera
+REGRA C7: SE faixa = avançado E perfil_tecnico = alto desempenho gráfico ENTÃO recomendacao = avançado para jogos
+REGRA C8: SE faixa = avançado E perfil_tecnico EM [processador simples, multitarefa e armazenamento amplo] ENTÃO recomendacao = avançado para produtividade
+REGRA C9: SE faixa = topo de linha E sistema = ios ENTÃO recomendacao = topo de linha ios
+REGRA C10: SE faixa = topo de linha E sistema EM [android, indiferente] ENTÃO recomendacao = topo de linha android
+REGRA C11 [prioridade 3]: SE faixa = topo de linha E sistema = indiferente E uso = trabalho ENTÃO recomendacao = topo de linha ios
+    EXPLICAÇÃO: Para quem não tem preferência e usa o aparelho no trabalho, a integração com outros dispositivos pesa a favor do ios.
+
+REGRA O1: SE bateria_importante = sim ENTÃO observacao = priorize modelos com bateria de 5000 mAh ou mais
+REGRA O2: SE mao_pequena = sim ENTÃO observacao = procure telas de até 6.1 polegadas
+REGRA O3: SE resistente_agua = sim E faixa EM [entrada] ENTÃO observacao = resistência à água é rara na faixa de entrada; considere uma capa à prova d'água
+REGRA O4: SE resistente_agua = sim E faixa EM [intermediário, avançado, topo de linha] ENTÃO observacao = procure certificação IP67 ou IP68
+REGRA O5: SE sistema = ios E faixa EM [entrada] ENTÃO observacao = no orçamento de entrada a oferta de aparelhos ios é limitada a modelos usados

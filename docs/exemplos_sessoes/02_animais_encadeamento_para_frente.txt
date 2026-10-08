@@ -1,0 +1,150 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Classificação de animais   (23 regras, 17 variáveis)
+ Identifica a classe (mamífero, ave, réptil, peixe, anfíbio) e o animal a partir de características observáveis.
+ Encadeamento: para frente (dirigido por dados)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> o animal tem penas e não voa, vive na água
+Anotado: tem penas = sim.
+Anotado: voa = não.
+Anotado: vive na água = sim.
+Com isso concluí: classe = ave
+você> o que você sabe?
+Fatos na memória de trabalho:
+  tem penas = sim   [informado]
+  voa = não   [informado]
+  vive na água = sim   [informado]
+  classe = ave   [regra C3]
+você> consultar
+
+Iniciando a consulta sobre «animal» — encadeamento para frente (dirigido por dados).
+
+? O animal tem pelos?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O corpo é coberto de escamas?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? A pele é úmida e lisa (sem pelos, penas ou escamas)?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? As fêmeas amamentam os filhotes?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O animal respira por guelras?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? Qual é a alimentação principal do animal?
+    1. carne
+    2. plantas
+    3. variada
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> variada
+
+? O animal tem pescoço muito longo?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O corpo tem listras?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? O corpo tem manchas?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+? Qual é o tamanho do animal?
+    1. pequeno
+    2. médio
+    3. grande
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> grande
+
+? É uma ave que não voa e anda sobre duas patas?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? O animal nada muito bem?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+✔ Conclusão: animal = avestruz
+   (modo frente · 12 pergunta(s) · regras disparadas: A9)
+   Digite «como?» para ver como cheguei a isso.
+
+Iniciando a consulta sobre «classe» — encadeamento para frente (dirigido por dados).
+
+✔ Conclusão: classe = ave
+   (modo frente · 0 pergunta(s) · regras disparadas: nenhuma regra nova)
+   Digite «como?» para ver como cheguei a isso.
+você> como
+• classe = ave — concluído pela regra C3:
+    SE tem penas = sim ENTÃO classe = ave
+    (justificativa da regra: Só as aves têm penas.)
+    porque:
+        • tem penas = sim — informado pelo usuário.
+você> trilha
+Trilha de inferência:
+  1. informado: tem penas = sim
+  2. informado: voa = não
+  3. informado: vive na água = sim
+  4. concluído: classe = ave (regra C3)
+  5. regra C3 disparada: SE tem penas = sim ENTÃO classe = ave
+  6. consulta: meta «animal» — modo frente
+  7. pergunta ao usuário: O animal tem pelos?
+  8. informado: tem pelos = não
+  9. pergunta ao usuário: O corpo é coberto de escamas?
+ 10. informado: tem escamas = não
+ 11. pergunta ao usuário: A pele é úmida e lisa (sem pelos, penas ou escamas)?
+ 12. informado: pele úmida e lisa = não
+ 13. pergunta ao usuário: As fêmeas amamentam os filhotes?
+ 14. informado: amamenta os filhotes = não
+ 15. pergunta ao usuário: O animal respira por guelras?
+ 16. informado: respira por guelras = não
+ 17. pergunta ao usuário: Qual é a alimentação principal do animal?
+ 18. informado: alimentação = variada
+ 19. pergunta ao usuário: O animal tem pescoço muito longo?
+ 20. informado: pescoço longo = não
+ 21. pergunta ao usuário: O corpo tem listras?
+ 22. informado: tem listras = não
+ 23. pergunta ao usuário: O corpo tem manchas?
+ 24. informado: tem manchas = não
+ 25. pergunta ao usuário: Qual é o tamanho do animal?
+ 26. informado: tamanho = grande
+ 27. pergunta ao usuário: É uma ave que não voa e anda sobre duas patas?
+ 28. informado: anda em duas patas e não voa = sim
+ 29. pergunta ao usuário: O animal nada muito bem?
+ 30. informado: nada muito bem = não
+ 31. concluído: animal = avestruz (regra A9)
+ 32. regra A9 disparada: SE classe = ave E voa = não E anda em duas patas e não voa = sim E tamanho = grande ENTÃO animal = avestruz
+ 33. meta «animal» estabelecida: avestruz
+ 34. consulta: meta «classe» — modo frente
+ 35. meta «classe» estabelecida: ave
+
+Até logo!

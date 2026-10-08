@@ -1,0 +1,88 @@
+# Suporte técnico de conexão com a internet — exemplo de base de conhecimento.
+BASE: Suporte técnico — internet que não funciona
+DESCRIÇÃO: Descobre a causa de uma falha de conexão (aparelho, Wi-Fi, roteador, DNS ou provedor) e indica o procedimento de solução.
+META: causa, solucao
+ESTRATÉGIA: ordem
+
+VARIÁVEL tipo_conexao
+    RÓTULO: tipo de conexão do aparelho
+    PERGUNTA: O aparelho com problema está ligado por Wi-Fi ou por cabo de rede?
+    VALORES: wifi, cabo
+
+VARIÁVEL outros_funcionam
+    RÓTULO: outros aparelhos navegam normalmente
+    PERGUNTA: Outros aparelhos da casa conseguem navegar normalmente?
+    VALORES: sim, não
+
+VARIÁVEL luz_internet
+    RÓTULO: luz de internet (WAN) do roteador
+    PERGUNTA: Como está a luz de internet (WAN/Internet) do roteador?
+    VALORES: acesa, apagada, vermelha ou piscando
+
+VARIÁVEL roteador_liga
+    RÓTULO: roteador está ligado
+    PERGUNTA: O roteador está ligado (alguma luz acesa)?
+    VALORES: sim, não
+
+VARIÁVEL wifi_conectado
+    RÓTULO: aparelho está conectado à rede Wi-Fi
+    PERGUNTA: O aparelho aparece como conectado à rede Wi-Fi?
+    VALORES: sim, não
+
+VARIÁVEL sinal
+    RÓTULO: intensidade do sinal Wi-Fi
+    PERGUNTA: Como está o sinal Wi-Fi no aparelho?
+    VALORES: forte, fraco
+
+VARIÁVEL abre_por_ip
+    RÓTULO: acessa sites digitando o endereço IP
+    PERGUNTA: Ao acessar um endereço IP (por exemplo, 8.8.8.8), a página/resposta aparece?
+    VALORES: sim, não
+
+VARIÁVEL abre_por_nome
+    RÓTULO: abre sites digitando o nome
+    PERGUNTA: Os sites abrem quando você digita o nome (por exemplo, www.google.com)?
+    VALORES: sim, não
+
+VARIÁVEL ip_valido
+    RÓTULO: o aparelho recebeu um endereço IP válido
+    PERGUNTA: O aparelho recebeu endereço IP válido (e não aparece "sem acesso à internet"/"IP 169.254...")?
+    VALORES: sim, não
+
+VARIÁVEL velocidade
+    RÓTULO: velocidade medida (Mbps)
+    PERGUNTA: Qual a velocidade medida em um teste (em Mbps)?
+    TIPO: numero
+
+VARIÁVEL causa
+    RÓTULO: causa provável
+    VALORES: roteador desligado, falha no provedor, problema de DNS, sinal Wi-Fi fraco, senha ou rede incorreta, configuração de IP, problema só no aparelho, velocidade abaixo do contratado, cabo de rede defeituoso
+
+VARIÁVEL solucao
+    RÓTULO: solução recomendada
+    MULTIVALORADA: sim
+    PERGUNTÁVEL: não
+
+REGRA I1: SE roteador_liga = não ENTÃO causa = roteador desligado
+REGRA I2: SE roteador_liga = sim E outros_funcionam = não E luz_internet = vermelha ou piscando ENTÃO causa = falha no provedor
+    EXPLICAÇÃO: Se ninguém navega e a luz de internet indica erro, o problema está fora da casa.
+REGRA I3: SE roteador_liga = sim E outros_funcionam = não E luz_internet = apagada ENTÃO causa = falha no provedor
+REGRA I4: SE outros_funcionam = sim E tipo_conexao = wifi E wifi_conectado = não ENTÃO causa = senha ou rede incorreta
+REGRA I5: SE outros_funcionam = sim E tipo_conexao = wifi E wifi_conectado = sim E sinal = fraco ENTÃO causa = sinal Wi-Fi fraco
+REGRA I6: SE outros_funcionam = sim E ip_valido = não ENTÃO causa = configuração de IP
+REGRA I7: SE abre_por_ip = sim E abre_por_nome = não ENTÃO causa = problema de DNS
+    EXPLICAÇÃO: Se o IP responde mas o nome não, a rede funciona e quem falha é a resolução de nomes (DNS).
+REGRA I8: SE outros_funcionam = sim E tipo_conexao = cabo E ip_valido = sim E abre_por_ip = não ENTÃO causa = cabo de rede defeituoso
+REGRA I9: SE outros_funcionam = sim E tipo_conexao = wifi E sinal = forte E ip_valido = sim E abre_por_ip = não ENTÃO causa = problema só no aparelho
+REGRA I10: SE abre_por_ip = sim E abre_por_nome = sim E velocidade < 50 ENTÃO causa = velocidade abaixo do contratado
+    EXPLICAÇÃO: Uma velocidade muito abaixo do contratado sugere congestionamento, Wi-Fi ruim ou problema no plano.
+
+REGRA S1: SE causa = roteador desligado ENTÃO solucao = verificar a tomada e a fonte do roteador
+REGRA S2: SE causa = falha no provedor ENTÃO solucao = reiniciar o roteador desligando-o por 30 segundos E solucao = ligar para o provedor e informar o protocolo
+REGRA S3: SE causa = senha ou rede incorreta ENTÃO solucao = esquecer a rede e reconectar digitando a senha novamente
+REGRA S4: SE causa = sinal Wi-Fi fraco ENTÃO solucao = aproximar-se do roteador E solucao = usar a banda de 5 GHz ou um repetidor
+REGRA S5: SE causa = configuração de IP ENTÃO solucao = ativar a obtenção automática de IP via DHCP E solucao = reiniciar o roteador
+REGRA S6: SE causa = problema de DNS ENTÃO solucao = trocar o servidor DNS para 8.8.8.8 e 1.1.1.1
+REGRA S7: SE causa = cabo de rede defeituoso ENTÃO solucao = trocar o cabo e testar outra porta do roteador
+REGRA S8: SE causa = problema só no aparelho ENTÃO solucao = reiniciar o aparelho e desativar VPN ou proxy e atualizar os drivers de rede
+REGRA S9: SE causa = velocidade abaixo do contratado ENTÃO solucao = repetir o teste por cabo e fechar downloads em segundo plano E solucao = contatar o provedor se persistir

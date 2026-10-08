@@ -1,0 +1,156 @@
+# Diagnóstico de defeitos em computador desktop — exemplo de base de conhecimento.
+BASE: Diagnóstico de computador
+DESCRIÇÃO: Localiza o subsistema defeituoso de um computador desktop (energia, memória, vídeo, disco, refrigeração ou software) e recomenda a ação de reparo.
+META: defeito, acao
+ESTRATÉGIA: prioridade
+
+VARIÁVEL liga
+    RÓTULO: o computador liga
+    PERGUNTA: Ao apertar o botão de energia, o computador mostra algum sinal de vida (luzes, ventoinhas)?
+    VALORES: sim, não
+
+VARIÁVEL ventoinhas_giram
+    RÓTULO: as ventoinhas giram
+    PERGUNTA: As ventoinhas (cooler) giram ao ligar?
+    VALORES: sim, não
+
+VARIÁVEL bipes
+    RÓTULO: bipes da placa-mãe
+    PERGUNTA: A placa-mãe emite bipes ao ligar?
+    VALORES: nenhum, curtos repetidos, um longo e dois curtos, longos repetidos
+
+VARIÁVEL imagem
+    RÓTULO: aparece imagem no monitor
+    PERGUNTA: Aparece alguma imagem no monitor?
+    VALORES: sim, não
+
+VARIÁVEL monitor_ok
+    RÓTULO: o monitor funciona em outro computador
+    PERGUNTA: O monitor e o cabo funcionam quando ligados em outro computador?
+    VALORES: sim, não
+
+VARIÁVEL sistema_inicia
+    RÓTULO: o sistema operacional inicia
+    PERGUNTA: O sistema operacional chega a iniciar?
+    VALORES: sim, não
+
+VARIÁVEL erro_disco
+    RÓTULO: mensagem de disco não encontrado
+    PERGUNTA: Aparece mensagem como "disco de boot não encontrado" ou "no bootable device"?
+    VALORES: sim, não
+
+VARIÁVEL ruido_hd
+    RÓTULO: ruído de cliques no disco
+    PERGUNTA: O disco rígido faz cliques ou ruído de raspagem?
+    VALORES: sim, não
+
+VARIÁVEL temperatura
+    RÓTULO: temperatura da CPU (°C)
+    PERGUNTA: Qual é a temperatura da CPU (em °C) com o computador em uso?
+    TIPO: numero
+
+VARIÁVEL reinicia_sozinho
+    RÓTULO: reinicia ou desliga sozinho
+    PERGUNTA: O computador reinicia ou desliga sozinho durante o uso?
+    VALORES: sim, não
+
+VARIÁVEL cheiro_queimado
+    RÓTULO: cheiro de queimado
+    PERGUNTA: Há cheiro de queimado ou componentes visivelmente danificados?
+    VALORES: sim, não
+
+VARIÁVEL tela_azul
+    RÓTULO: telas azuis
+    PERGUNTA: Ocorrem telas azuis de erro (ou travamentos com mensagem de erro)?
+    VALORES: sim, não
+
+VARIÁVEL lentidao
+    RÓTULO: lentidão geral
+    PERGUNTA: O computador está muito lento?
+    VALORES: sim, não
+
+VARIÁVEL antivirus_detecta
+    RÓTULO: antivírus detecta ameaças
+    PERGUNTA: Uma verificação completa com antivírus encontra ameaças?
+    VALORES: sim, não
+
+VARIÁVEL subsistema
+    RÓTULO: subsistema suspeito
+    VALORES: energia, memória, vídeo, disco, refrigeração, software
+    MULTIVALORADA: sim
+
+VARIÁVEL defeito
+    RÓTULO: defeito provável
+    VALORES: fonte de alimentação, memória RAM, placa de vídeo ou cabo, monitor ou cabo de vídeo, disco com falha, disco desconectado ou sem sistema, superaquecimento, sistema operacional corrompido, malware, desgaste do sistema
+    MULTIVALORADA: sim
+
+VARIÁVEL gravidade
+    RÓTULO: gravidade dos defeitos
+    VALORES: baixa, média, alta
+    MULTIVALORADA: sim
+    PERGUNTÁVEL: não
+
+VARIÁVEL acao
+    RÓTULO: ação recomendada
+    MULTIVALORADA: sim
+    PERGUNTÁVEL: não
+
+# ---- energia -------------------------------------------------------------------------------
+REGRA E1 [prioridade 9]: SE cheiro_queimado = sim ENTÃO subsistema = energia E gravidade = alta
+    EXPLICAÇÃO: Cheiro de queimado indica componente elétrico danificado; é preciso desligar da tomada.
+REGRA E2: SE liga = não E cheiro_queimado = não ENTÃO subsistema = energia
+    EXPLICAÇÃO: Sem nenhum sinal de vida, a causa mais comum é a alimentação elétrica.
+REGRA E3 [prioridade 5]: SE subsistema = energia ENTÃO defeito = fonte de alimentação
+REGRA E4: SE liga = sim E ventoinhas_giram = não ENTÃO subsistema = refrigeração
+
+# ---- memória -------------------------------------------------------------------------------
+REGRA M1 [prioridade 6]: SE bipes = curtos repetidos OU bipes = longos repetidos ENTÃO subsistema = memória
+    EXPLICAÇÃO: Os códigos de bipe da BIOS de vários fabricantes sinalizam falha de memória.
+REGRA M2: SE tela_azul = sim E sistema_inicia = sim E temperatura < 80 ENTÃO subsistema = memória
+    EXPLICAÇÃO: Telas azuis frequentes sem superaquecimento costumam vir de memória defeituosa ou drivers.
+REGRA M3: SE subsistema = memória ENTÃO defeito = memória RAM
+
+# ---- vídeo ---------------------------------------------------------------------------------
+REGRA V1: SE liga = sim E imagem = não E bipes = um longo e dois curtos ENTÃO subsistema = vídeo
+REGRA V2: SE liga = sim E imagem = não E bipes = nenhum E ventoinhas_giram = sim ENTÃO subsistema = vídeo
+REGRA V3: SE subsistema = vídeo E monitor_ok = sim ENTÃO defeito = placa de vídeo ou cabo
+REGRA V4: SE subsistema = vídeo E monitor_ok = não ENTÃO defeito = monitor ou cabo de vídeo
+
+# ---- disco ---------------------------------------------------------------------------------
+REGRA D1: SE ruido_hd = sim ENTÃO subsistema = disco
+    EXPLICAÇÃO: Cliques e raspagem são sintomas clássicos de falha mecânica do disco rígido.
+REGRA D2: SE sistema_inicia = não E erro_disco = sim E ruido_hd = não ENTÃO subsistema = disco
+REGRA D3 [prioridade 4]: SE subsistema = disco E ruido_hd = sim ENTÃO defeito = disco com falha
+REGRA D4: SE subsistema = disco E ruido_hd = não ENTÃO defeito = disco desconectado ou sem sistema
+
+# ---- refrigeração --------------------------------------------------------------------------
+REGRA T1: SE temperatura >= 85 ENTÃO subsistema = refrigeração
+    EXPLICAÇÃO: Acima de 85 °C a CPU reduz o desempenho e pode desligar para se proteger.
+REGRA T2: SE reinicia_sozinho = sim E temperatura >= 75 ENTÃO subsistema = refrigeração
+REGRA T3: SE subsistema = refrigeração ENTÃO defeito = superaquecimento
+
+# ---- software ------------------------------------------------------------------------------
+REGRA S1: SE sistema_inicia = não E erro_disco = não E liga = sim E imagem = sim ENTÃO subsistema = software
+REGRA S2: SE antivirus_detecta = sim ENTÃO subsistema = software
+REGRA S3: SE lentidao = sim E temperatura < 75 E ruido_hd = não ENTÃO subsistema = software
+REGRA S4 [prioridade 2]: SE subsistema = software E antivirus_detecta = sim ENTÃO defeito = malware
+REGRA S5: SE subsistema = software E antivirus_detecta = não E sistema_inicia = não ENTÃO defeito = sistema operacional corrompido
+REGRA S6: SE subsistema = software E antivirus_detecta = não E sistema_inicia = sim ENTÃO defeito = desgaste do sistema
+
+# ---- gravidade -----------------------------------------------------------------------------
+REGRA G1: SE defeito EM [fonte de alimentação, disco com falha] ENTÃO gravidade = alta
+REGRA G2: SE defeito EM [memória RAM, placa de vídeo ou cabo, superaquecimento, malware, sistema operacional corrompido, disco desconectado ou sem sistema] ENTÃO gravidade = média
+REGRA G3: SE defeito EM [monitor ou cabo de vídeo, desgaste do sistema] ENTÃO gravidade = baixa
+
+# ---- ações recomendadas --------------------------------------------------------------------
+REGRA X1: SE defeito = fonte de alimentação ENTÃO acao = verificar tomada e cabo de força E acao = testar ou trocar a fonte
+REGRA X2: SE defeito = memória RAM ENTÃO acao = reencaixar os pentes de memória E acao = testar um pente por vez ou rodar o MemTest
+REGRA X3: SE defeito = placa de vídeo ou cabo ENTÃO acao = reencaixar a placa de vídeo e trocar o cabo de vídeo
+REGRA X4: SE defeito = monitor ou cabo de vídeo ENTÃO acao = testar outro monitor ou cabo
+REGRA X5: SE defeito = disco com falha ENTÃO acao = fazer backup dos dados imediatamente E acao = substituir o disco
+REGRA X6: SE defeito = disco desconectado ou sem sistema ENTÃO acao = conferir os cabos do disco e a ordem de boot na BIOS E acao = reinstalar o sistema se necessário
+REGRA X7: SE defeito = superaquecimento ENTÃO acao = limpar poeira e ventoinhas E acao = trocar a pasta térmica
+REGRA X8: SE defeito = malware ENTÃO acao = isolar o equipamento da rede E acao = executar remoção completa com antivírus
+REGRA X9: SE defeito = sistema operacional corrompido ENTÃO acao = executar o reparo de inicialização E acao = reinstalar o sistema se persistir
+REGRA X10: SE defeito = desgaste do sistema ENTÃO acao = remover programas de inicialização e liberar espaço em disco
+REGRA X11: SE gravidade = alta ENTÃO acao = não insistir em ligar o equipamento até a verificação

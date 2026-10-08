@@ -1,0 +1,116 @@
+========================================================================
+ SHELL DE SISTEMA BASEADO EM CONHECIMENTO
+ Base carregada: Escolha de smartphone   (24 regras, 10 variáveis)
+ Recomenda o perfil de smartphone mais adequado ao orçamento e ao uso do cliente.
+ Encadeamento: para trás (dirigido por meta)
+ Digite «ajuda» para ver o que posso fazer, ou «consultar» para começar.
+========================================================================
+você> consultar observacao
+
+Iniciando a consulta sobre «observações» — encadeamento para trás (dirigido por meta).
+
+? Precisa que o aparelho resista a água e poeira?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Qual é o seu orçamento máximo, em reais?
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> 2500
+
+? Qual sistema operacional você prefere?
+    1. android
+    2. ios
+    3. indiferente
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> android
+
+? Passa o dia fora de casa e precisa de bateria de longa duração?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Prefere um aparelho compacto, de uso com uma só mão?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+✔ Conclusão: observações = procure certificação IP67 ou IP68, priorize modelos com bateria de 5000 mAh ou mais
+   (modo tras · 5 pergunta(s) · regras disparadas: F2, O4, O1)
+   Digite «como?» para ver como cheguei a isso.
+você> como
+• observações = procure certificação IP67 ou IP68 — concluído pela regra O4:
+    SE precisa de resistência à água = sim E faixa de preço ∈ {intermediário, avançado, topo de linha} ENTÃO observações = procure certificação IP67 ou IP68
+    porque:
+        • precisa de resistência à água = sim — informado pelo usuário.
+        • faixa de preço = intermediário — concluído pela regra F2:
+            SE orçamento (R$) ≥ 1200 E orçamento (R$) < 3000 ENTÃO faixa de preço = intermediário
+            porque:
+                • orçamento (R$) = 2500 — informado pelo usuário.
+você> adicionar regra: SE faixa = intermediário E uso = jogos E bateria_importante = sim ENTÃO observacao = jogos exigem bateria grande
+Regra R25 adicionada: SE faixa de preço = intermediário E uso principal = jogos E autonomia de bateria é prioridade = sim ENTÃO observações = jogos exigem bateria grande
+você> validar
+Base consistente: nenhum problema encontrado.
+você> limpar
+Memória limpa. Podemos começar uma nova consulta.
+você> consultar observacao
+
+Iniciando a consulta sobre «observações» — encadeamento para trás (dirigido por meta).
+
+? Qual é o seu orçamento máximo, em reais?
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> 2500
+
+? Qual será o uso principal do aparelho?
+    1. básico
+    2. fotos
+    3. jogos
+    4. trabalho
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> jogos
+
+? Passa o dia fora de casa e precisa de bateria de longa duração?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Precisa que o aparelho resista a água e poeira?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> sim
+
+? Qual sistema operacional você prefere?
+    1. android
+    2. ios
+    3. indiferente
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> android
+
+? Prefere um aparelho compacto, de uso com uma só mão?
+    1. sim
+    2. não
+  (responda com o valor ou o número; «por quê?» explica a pergunta; «não sei»; «cancelar»)
+você> não
+
+✔ Conclusão: observações = jogos exigem bateria grande, procure certificação IP67 ou IP68, priorize modelos com bateria de 5000 mAh ou mais
+   (modo tras · 6 pergunta(s) · regras disparadas: F2, R25, O4, O1)
+   Digite «como?» para ver como cheguei a isso.
+você> o que você sabe?
+Fatos na memória de trabalho:
+  orçamento (R$) = 2500   [informado]
+  faixa de preço = intermediário   [regra F2]
+  uso principal = jogos   [informado]
+  autonomia de bateria é prioridade = sim   [informado]
+  observações = jogos exigem bateria grande   [regra R25]
+  observações = procure certificação IP67 ou IP68   [regra O4]
+  observações = priorize modelos com bateria de 5000 mAh ou mais   [regra O1]
+  precisa de resistência à água = sim   [informado]
+  sistema preferido = android   [informado]
+  prefere aparelho compacto = não   [informado]
+
+Até logo!

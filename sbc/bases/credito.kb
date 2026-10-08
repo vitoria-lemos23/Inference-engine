@@ -1,0 +1,62 @@
+BASE: Risco de crédito (árvore ID3 da Questão 1)
+DESCRIÇÃO: Avalia o risco de crédito (Baixo, Moderado ou Alto) de um solicitante. As regras foram extraídas da árvore ID3 treinada com os 30 exemplos da Questão 1.
+META: Risco
+ESTRATÉGIA: ordem
+
+VARIÁVEL "História de Crédito"
+    PERGUNTA: Como é o histórico de crédito do solicitante?
+    VALORES: Boa, Desconhecida, Ruim
+
+VARIÁVEL Dívida
+    PERGUNTA: O nível de dívida é alto ou baixo?
+    VALORES: Baixa, Alta
+
+VARIÁVEL Garantia
+    PERGUNTA: O solicitante oferece garantia?
+    VALORES: Nenhuma, Adequada
+
+VARIÁVEL Renda
+    PERGUNTA: Qual é a faixa de renda anual do solicitante?
+    VALORES: "$0 a $15k", "$15 a $35k", "Acima de $35k"
+
+VARIÁVEL "Tempo de Emprego"
+    PERGUNTA: Há quanto tempo está empregado (Curto, Médio, Longo)?
+    VALORES: Curto, Médio, Longo
+
+VARIÁVEL Residência
+    PERGUNTA: A residência é própria ou alugada?
+    VALORES: Alugada, Própria
+
+VARIÁVEL Risco
+    PERGUNTA: Qual é o valor de Risco?
+    VALORES: Baixo, Moderado, Alto
+    PERGUNTÁVEL: não
+
+REGRA R1: SE Renda = "$0 a $15k" E "Tempo de Emprego" = Curto ENTÃO Risco = Alto
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 4 exemplo(s) do treinamento, 4 classificado(s) corretamente.
+REGRA R2: SE Renda = "$0 a $15k" E "Tempo de Emprego" = Médio ENTÃO Risco = Alto
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.
+REGRA R3: SE Renda = "$0 a $15k" E "Tempo de Emprego" = Longo E Dívida = Baixa ENTÃO Risco = Moderado
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 1 exemplo(s) do treinamento, 1 classificado(s) corretamente.
+REGRA R4: SE Renda = "$0 a $15k" E "Tempo de Emprego" = Longo E Dívida = Alta ENTÃO Risco = Alto
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 1 exemplo(s) do treinamento, 1 classificado(s) corretamente.
+REGRA R5: SE Renda = "$15 a $35k" E "História de Crédito" = Boa E Dívida = Baixa ENTÃO Risco = Baixo
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.
+REGRA R6: SE Renda = "$15 a $35k" E "História de Crédito" = Boa E Dívida = Alta ENTÃO Risco = Moderado
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.
+REGRA R7: SE Renda = "$15 a $35k" E "História de Crédito" = Desconhecida E Dívida = Baixa ENTÃO Risco = Moderado
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.
+REGRA R8: SE Renda = "$15 a $35k" E "História de Crédito" = Desconhecida E Dívida = Alta ENTÃO Risco = Alto
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.
+REGRA R9: SE Renda = "$15 a $35k" E "História de Crédito" = Ruim E "Tempo de Emprego" = Curto ENTÃO Risco = Alto
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 1 exemplo(s) do treinamento, 1 classificado(s) corretamente.
+REGRA R10: SE Renda = "$15 a $35k" E "História de Crédito" = Ruim E "Tempo de Emprego" = Médio ENTÃO Risco = Alto
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 1 exemplo(s) do treinamento, 1 classificado(s) corretamente.
+REGRA R11: SE Renda = "$15 a $35k" E "História de Crédito" = Ruim E "Tempo de Emprego" = Longo ENTÃO Risco = Moderado
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 1 exemplo(s) do treinamento, 1 classificado(s) corretamente.
+REGRA R12: SE Renda = "Acima de $35k" E "História de Crédito" = Boa ENTÃO Risco = Baixo
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 5 exemplo(s) do treinamento, 5 classificado(s) corretamente.
+REGRA R13: SE Renda = "Acima de $35k" E "História de Crédito" = Desconhecida ENTÃO Risco = Baixo
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 4 exemplo(s) do treinamento, 4 classificado(s) corretamente.
+REGRA R14: SE Renda = "Acima de $35k" E "História de Crédito" = Ruim ENTÃO Risco = Moderado
+    EXPLICAÇÃO: Regra extraída da árvore (ID3): cobre 2 exemplo(s) do treinamento, 2 classificado(s) corretamente.
