@@ -354,14 +354,13 @@ def atributos_usados(no):
 
 
 # ====================================================================== validação cruzada
-def validacao_cruzada(base, algoritmo, k=5, repeticoes=20, semente=42, **kw):
-    """k-fold estratificado repetido. Retorna (média, desvio-padrão, lista de acurácias)."""
+def gerar_dobras(base, k=5, repeticoes=20, semente=42):
+    """k-fold estratificado repetido. Gera, para cada repetição, a lista de k listas de índices de teste.
+    (Mesma semente => mesmas dobras; permite comparar modelos de bibliotecas diferentes no mesmo protocolo.)"""
     import random
-    import statistics
 
     rng = random.Random(semente)
     por_classe = {c: [i for i, l in enumerate(base.linhas) if l[base.classe] == c] for c in base.classes}
-    acuracias = []
     for _ in range(repeticoes):
         dobras = [[] for _ in range(k)]
         for c, idx in por_classe.items():
@@ -369,9 +368,19 @@ def validacao_cruzada(base, algoritmo, k=5, repeticoes=20, semente=42, **kw):
             rng.shuffle(idx)
             for j, i in enumerate(idx):
                 dobras[j % k].append(i)
+        yield dobras
+
+
+def validacao_cruzada(base, algoritmo, k=5, repeticoes=20, semente=42, **kw):
+    """CV estratificada repetida do algoritmo próprio. Retorna (média, desvio-padrão, lista de acurácias)."""
+    import statistics
+
+    acuracias = []
+    for dobras in gerar_dobras(base, k, repeticoes, semente):
         certos = 0
         for teste in dobras:
-            treino = [l for i, l in enumerate(base.linhas) if i not in set(teste)]
+            ts = set(teste)
+            treino = [l for i, l in enumerate(base.linhas) if i not in ts]
             r = construir(base.com_linhas(treino), algoritmo, **kw)[0]
             certos += sum(prever(r, base.linhas[i]) == base.linhas[i][base.classe] for i in teste)
         acuracias.append(certos / len(base.linhas))

@@ -1,0 +1,31 @@
+|--- Renda = Acima de $35k <= 0.50
+|   |--- Tempo de Emprego = Longo <= 0.50
+|   |   |--- Renda = $0 a $15k <= 0.50
+|   |   |   |--- História de Crédito = Ruim <= 0.50
+|   |   |   |   |--- História de Crédito = Desconhecida <= 0.50
+|   |   |   |   |   |--- weights: [0.00, 0.00, 2.00] class: Moderado
+|   |   |   |   |--- História de Crédito = Desconhecida >  0.50
+|   |   |   |   |   |--- Dívida = Baixa <= 0.50
+|   |   |   |   |   |   |--- weights: [2.00, 0.00, 0.00] class: Alto
+|   |   |   |   |   |--- Dívida = Baixa >  0.50
+|   |   |   |   |   |   |--- weights: [0.00, 0.00, 2.00] class: Moderado
+|   |   |   |--- História de Crédito = Ruim >  0.50
+|   |   |   |   |--- weights: [2.00, 0.00, 0.00] class: Alto
+|   |   |--- Renda = $0 a $15k >  0.50
+|   |   |   |--- weights: [6.00, 0.00, 0.00] class: Alto
+|   |--- Tempo de Emprego = Longo >  0.50
+|   |   |--- Renda = $0 a $15k <= 0.50
+|   |   |   |--- Dívida = Alta <= 0.50
+|   |   |   |   |--- weights: [0.00, 2.00, 0.00] class: Baixo
+|   |   |   |--- Dívida = Alta >  0.50
+|   |   |   |   |--- weights: [0.00, 0.00, 1.00] class: Moderado
+|   |   |--- Renda = $0 a $15k >  0.50
+|   |   |   |--- Garantia = Nenhuma <= 0.50
+|   |   |   |   |--- weights: [0.00, 0.00, 1.00] class: Moderado
+|   |   |   |--- Garantia = Nenhuma >  0.50
+|   |   |   |   |--- weights: [1.00, 0.00, 0.00] class: Alto
+|--- Renda = Acima de $35k >  0.50
+|   |--- História de Crédito = Ruim <= 0.50
+|   |   |--- weights: [0.00, 9.00, 0.00] class: Baixo
+|   |--- História de Crédito = Ruim >  0.50
+|   |   |--- weights: [0.00, 0.00, 2.00] class: Moderado

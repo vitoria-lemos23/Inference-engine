@@ -1,0 +1,41 @@
+@relation credito_ampliado
+
+@attribute 'História de Crédito' {'Boa','Desconhecida','Ruim'}
+@attribute 'Dívida' {'Baixa','Alta'}
+@attribute 'Garantia' {'Nenhuma','Adequada'}
+@attribute 'Renda' {'$0 a $15k','$15 a $35k','Acima de $35k'}
+@attribute 'Tempo de Emprego' {'Curto','Médio','Longo'}
+@attribute 'Residência' {'Alugada','Própria'}
+@attribute 'Risco' {'Baixo','Moderado','Alto'}
+
+@data
+'Ruim','Alta','Nenhuma','$0 a $15k','Curto','Alugada','Alto'
+'Desconhecida','Alta','Nenhuma','$15 a $35k','Curto','Alugada','Alto'
+'Desconhecida','Baixa','Nenhuma','$15 a $35k','Médio','Própria','Moderado'
+'Desconhecida','Baixa','Nenhuma','$0 a $15k','Médio','Alugada','Alto'
+'Desconhecida','Baixa','Nenhuma','Acima de $35k','Longo','Própria','Baixo'
+'Desconhecida','Baixa','Adequada','Acima de $35k','Médio','Alugada','Baixo'
+'Ruim','Baixa','Nenhuma','$0 a $15k','Curto','Alugada','Alto'
+'Ruim','Baixa','Adequada','Acima de $35k','Médio','Própria','Moderado'
+'Boa','Baixa','Nenhuma','Acima de $35k','Longo','Própria','Baixo'
+'Boa','Alta','Adequada','Acima de $35k','Médio','Alugada','Baixo'
+'Boa','Alta','Nenhuma','$0 a $15k','Curto','Alugada','Alto'
+'Boa','Alta','Nenhuma','$15 a $35k','Curto','Alugada','Moderado'
+'Boa','Alta','Nenhuma','Acima de $35k','Médio','Própria','Baixo'
+'Ruim','Alta','Nenhuma','$15 a $35k','Médio','Alugada','Alto'
+'Ruim','Baixa','Nenhuma','$15 a $35k','Curto','Alugada','Alto'
+'Desconhecida','Alta','Adequada','$15 a $35k','Curto','Própria','Alto'
+'Boa','Alta','Nenhuma','$0 a $15k','Longo','Própria','Alto'
+'Ruim','Baixa','Adequada','$0 a $15k','Curto','Alugada','Alto'
+'Desconhecida','Baixa','Adequada','$0 a $15k','Médio','Alugada','Alto'
+'Ruim','Alta','Nenhuma','$15 a $35k','Longo','Própria','Moderado'
+'Desconhecida','Baixa','Adequada','$15 a $35k','Curto','Alugada','Moderado'
+'Boa','Alta','Nenhuma','$15 a $35k','Curto','Alugada','Moderado'
+'Ruim','Alta','Adequada','Acima de $35k','Médio','Própria','Moderado'
+'Boa','Baixa','Adequada','$0 a $15k','Longo','Própria','Moderado'
+'Boa','Baixa','Adequada','$15 a $35k','Longo','Própria','Baixo'
+'Boa','Baixa','Nenhuma','$15 a $35k','Longo','Própria','Baixo'
+'Desconhecida','Alta','Nenhuma','Acima de $35k','Médio','Alugada','Baixo'
+'Boa','Baixa','Nenhuma','Acima de $35k','Curto','Alugada','Baixo'
+'Desconhecida','Baixa','Adequada','Acima de $35k','Longo','Própria','Baixo'
+'Boa','Alta','Adequada','Acima de $35k','Médio','Própria','Baixo'
