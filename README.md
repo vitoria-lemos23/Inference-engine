@@ -1,6 +1,7 @@
 # Lista 1 de Inteligência Artificial — 2026.2
 
 Alunos: Gabriel Calixto, Vitória Lemos
+
 Resolução da Lista 1 (Prof. Evandro Costa): árvores de decisão (ID3, C4.5, CART), extração e comparação de bases de
 regras, aprendizado direto de regras (PRISM) e um *shell* genérico de sistemas baseados em conhecimento.
 Enunciado: [`docs/enunciado_lista1.pdf`](docs/enunciado_lista1.pdf).
